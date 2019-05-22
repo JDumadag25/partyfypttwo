@@ -3,26 +3,29 @@ import logo from './logo.svg';
 import './App.css';
 import MusicPlayer from './components/MusicPlayer'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      token: "",
+      deviceId: "",
+      loggedIn: false,
+      error: "",
+      trackName: "Track Name",
+      artistName: "Artist Name",
+      albumName: "Album Name",
+      playing: false,
+      position: 0,
+      duration: 0,
+    };
+  }
+  render() {
+    /* ... */
+    return(
       <MusicPlayer/>
-    </div>
-  );
+    )
+  }
+
 }
 
 export default App;
