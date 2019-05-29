@@ -18,11 +18,27 @@ class App extends React.Component {
       position: 0,
       duration: 0,
     };
+     this.playerCheckInterval = null;
   }
 
   handleLogin() {
   if (this.state.token !== "") {
     this.setState({ loggedIn: true });
+  }
+}
+
+checkForPlayer() {
+  const { token } = this.state;
+
+  if (window.Spotify !== null) {
+    this.player = new window.Spotify.Player({
+      name: "Matt's Spotify Player",
+      getOAuthToken: cb => { cb(token); },
+    });
+    // this.createEventHandlers();
+
+    // finally, connect!
+    this.player.connect();
   }
 }
 
