@@ -24,17 +24,16 @@ class App extends React.Component {
   handleLogin() {
   if (this.state.token !== "") {
     this.setState({ loggedIn: true });
+    this.playerCheckInterval = setInterval(() => this.checkForPlayer(), 1000);
     }
   }
 
 checkForPlayer() {
   const { token } = this.state;
 
-  if (window.Spotify !== null) {
-    // cancel the interval
-    clearInterval(this.playerCheckInterval);
 
   if (window.Spotify !== null) {
+    clearInterval(this.playerCheckInterval);
     this.player = new window.Spotify.Player({
       name: "Justin's Spotify Player",
       getOAuthToken: cb => { cb(token); },
@@ -45,7 +44,7 @@ checkForPlayer() {
     this.player.connect();
     }
   }
-}
+
 
 
 createEventHandlers() {
