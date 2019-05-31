@@ -42,6 +42,36 @@ checkForPlayer() {
   }
 }
 
+checkForPlayer() {
+  const { token } = this.state;
+
+  if (window.Spotify !== null) {
+    // cancel the interval
+    clearInterval(this.playerCheckInterval);
+    /* etc... */
+  }
+}
+
+createEventHandlers() {
+  this.player.on('initialization_error', e => { console.error(e); });
+  this.player.on('authentication_error', e => {
+    console.error(e);
+    this.setState({ loggedIn: false });
+  });
+  this.player.on('account_error', e => { console.error(e); });
+  this.player.on('playback_error', e => { console.error(e); });
+
+  // Playback status updates
+  this.player.on('player_state_changed', state => { console.log(state); });
+
+  // Ready
+  this.player.on('ready', data => {
+    let { device_id } = data;
+    console.log("Let the music play on!");
+    this.setState({ deviceId: device_id });
+  });
+}
+
   render() {
   const {
     token,
