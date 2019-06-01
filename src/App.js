@@ -31,7 +31,6 @@ class App extends React.Component {
 checkForPlayer() {
   const { token } = this.state;
 
-
   if (window.Spotify !== null) {
     clearInterval(this.playerCheckInterval);
     this.player = new window.Spotify.Player({
@@ -42,6 +41,31 @@ checkForPlayer() {
 
     // finally, connect!
     this.player.connect();
+    }
+  }
+
+  onStateChanged(state) {
+    // if we're no longer listening to music, we'll get a null state.
+    if (state !== null) {
+      const {
+        current_track: currentTrack,
+        position,
+        duration,
+      } = state.track_window;
+      const trackName = currentTrack.name;
+      const albumName = currentTrack.album.name;
+      const artistName = currentTrack.artists
+        .map(artist => artist.name)
+        .join(", ");
+      const playing = !state.paused;
+      this.setState({
+        position,
+        duration,
+        trackName,
+        albumName,
+        artistName,
+        playing
+      });
     }
   }
 
@@ -57,7 +81,7 @@ createEventHandlers() {
   this.player.on('playback_error', e => { console.error(e); });
 
   // Playback status updates
-  this.player.on('player_state_changed', state => { console.log(state); });
+  this.player.on('player_state_changed', state => this.onStateChanged(state));
 
   // Ready
   this.player.on('ready', data => {
