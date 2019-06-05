@@ -67,25 +67,36 @@ class MusicPlayer extends React.Component{
   }
 
 
-
   createEventHandlers() {
-  this.player.on('initialization_error', e => { console.error(e); });
-  this.player.on('authentication_error', e => {
-    console.error(e);
-    this.setState({ loggedIn: false });
-  });
-  this.player.on('account_error', e => { console.error(e); });
-  this.player.on('playback_error', e => { console.error(e); });
+    this.player.on('initialization_error', e => { console.error(e); });
+    this.player.on('authentication_error', e => {
+      console.error(e);
+      this.setState({ loggedIn: false });
+    });
+    this.player.on('account_error', e => { console.error(e); });
+    this.player.on('playback_error', e => { console.error(e); });
 
-  // Playback status updates
-  this.player.on('player_state_changed', state => this.onStateChanged(state));
+    // Playback status updates
+    this.player.on('player_state_changed', state => this.onStateChanged(state));
 
-  // Ready
-  this.player.on('ready', data => {
-    let { device_id } = data;
-    console.log("Let the music play on!");
-    this.setState({ deviceId: device_id });
-  });
+    // Ready
+    this.player.on('ready', data => {
+      let { device_id } = data;
+      console.log("Let the music play on!");
+      this.setState({ deviceId: device_id });
+   });
+  }
+
+  onPrevClick() {
+    this.player.previousTrack();
+  }
+
+  onPlayClick() {
+    this.player.togglePlay();
+  }
+
+  onNextClick() {
+    this.player.nextTrack();
   }
 
   render() {
@@ -114,6 +125,11 @@ class MusicPlayer extends React.Component{
            <p>Artist: {artistName}</p>
            <p>Track: {trackName}</p>
            <p>Album: {albumName}</p>
+           <p>
+             <button onClick={() => this.onPrevClick()}>Previous</button>
+             <button onClick={() => this.onPlayClick()}>{playing ? "Pause" : "Play"}</button>
+             <button onClick={() => this.onNextClick()}>Next</button>
+           </p>
          </div>)
          :
          (<div>
