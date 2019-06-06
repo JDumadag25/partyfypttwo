@@ -80,10 +80,11 @@ class MusicPlayer extends React.Component{
     this.player.on('player_state_changed', state => this.onStateChanged(state));
 
     // Ready
-    this.player.on('ready', data => {
+    this.player.on('ready', async data => {
       let { device_id } = data;
       console.log("Let the music play on!");
-      this.setState({ deviceId: device_id });
+      await this.setState({ deviceId: device_id });
+      this.transferPlaybackHere();
    });
   }
 
@@ -98,6 +99,21 @@ class MusicPlayer extends React.Component{
   onNextClick() {
     this.player.nextTrack();
   }
+
+  transferPlaybackHere() {
+  const { deviceId, token } = this.state;
+  fetch("https://api.spotify.com/v1/me/player", {
+    method: "PUT",
+    headers: {
+      authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      "device_ids": [ deviceId ],
+      "play": true,
+    }),
+  });
+}
 
   render() {
   const {
