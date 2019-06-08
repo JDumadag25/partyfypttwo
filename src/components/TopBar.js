@@ -4,9 +4,11 @@ import { Button } from 'semantic-ui-react'
 class TopBar extends React.Component{
   render(){
     return(
-      <div>
+      <div className='TopBar'>
         <Button>Click Me</Button>
       </div>
+
+
     )
   }
 }

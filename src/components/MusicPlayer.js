@@ -128,11 +128,7 @@ class MusicPlayer extends React.Component{
     playing, } = this.state;
 
   return (
-    <div className="App">
-         <div className="App-header">
-           <h2>Now Playing</h2>
-           <p>A Spotify Web Playback API Demo.</p>
-         </div>
+    <div className="MusicPlayer">
 
          {error && <p>Error: {error}</p>}
 

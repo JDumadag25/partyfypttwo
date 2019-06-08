@@ -4,13 +4,14 @@ import './App.css';
 import MusicPlayer from './components/MusicPlayer'
 import TopBar from './components/TopBar'
 
+
 class App extends React.Component {
   render(){
     return (
-      <div>
+<div>
       <TopBar/>
       <MusicPlayer/>
-      </div>
+</div>
     )
   }
 }
