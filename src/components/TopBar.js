@@ -5,7 +5,7 @@ class TopBar extends React.Component{
   render(){
     return(
       <div className='TopBar'>
-        <Button>Click Me</Button>
+        <Button href='http://localhost:8888'>Log Into Spotify</Button>
       </div>
 
 

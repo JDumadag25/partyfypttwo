@@ -8,7 +8,7 @@ import TopBar from './components/TopBar'
 class App extends React.Component {
   render(){
     return (
-<div>
+<div className='App'>
       <TopBar/>
       <MusicPlayer/>
 </div>
