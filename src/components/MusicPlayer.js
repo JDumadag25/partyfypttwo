@@ -3,10 +3,15 @@ import React from 'react';
 class MusicPlayer extends React.Component{
   constructor(props) {
     super(props);
+    
+    const params = this.getHashParams();
+    console.log(params);
+
     this.state = {
-      token: "",
+      refreshToken: params.refresh_token,
+      token: params.access_token,
       deviceId: "",
-      loggedIn: false,
+      loggedIn: params.access_token ? true : false,
       error: "",
       trackName: "Track Name",
       artistName: "Artist Name",
@@ -23,6 +28,18 @@ class MusicPlayer extends React.Component{
     this.setState({ loggedIn: true });
     this.playerCheckInterval = setInterval(() => this.checkForPlayer(), 1000);
     }
+  }
+
+  getHashParams = () => {
+    var hashParams = {};
+    var e, r = /([^&;=]+)=?([^&;]*)/g,
+        q = window.location.hash.substring(1);
+    e = r.exec(q)
+    while (e) {
+       hashParams[e[1]] = decodeURIComponent(e[2]);
+       e = r.exec(q);
+    }
+    return hashParams
   }
 
   checkForPlayer() {
