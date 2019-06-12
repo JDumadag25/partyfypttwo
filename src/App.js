@@ -8,10 +8,10 @@ import TopBar from './components/TopBar'
 class App extends React.Component {
   render(){
     return (
-<div className='App'>
-      <TopBar/>
-      <MusicPlayer/>
-</div>
+      <div className='App'>
+        <TopBar/>
+        <MusicPlayer/>
+      </div>
     )
   }
 }

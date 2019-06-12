@@ -3,7 +3,7 @@ import React from 'react';
 class MusicPlayer extends React.Component{
   constructor(props) {
     super(props);
-    
+
     const params = this.getHashParams();
     console.log(params);
 
@@ -23,9 +23,10 @@ class MusicPlayer extends React.Component{
      this.playerCheckInterval = null;
   }
 
-  handleLogin() {
-  if (this.state.token !== "") {
-    this.setState({ loggedIn: true });
+loc
+
+  componentDidMount = () => {
+    if (this.state.loggedIn) {
     this.playerCheckInterval = setInterval(() => this.checkForPlayer(), 1000);
     }
   }
@@ -163,16 +164,7 @@ class MusicPlayer extends React.Component{
          :
          (<div>
            <p className="App-intro">
-             Enter your Spotify access token. Get it from{" "}
-             <a href="https://beta.developer.spotify.com/documentation/web-playback-sdk/quick-start/#authenticating-with-spotify">
-               here
-             </a>.
-           </p>
-           <p>
-             <input type="text" value={token} onChange={e => this.setState({ token: e.target.value })} />
-           </p>
-           <p>
-             <button onClick={() => this.handleLogin()}>Go</button>
+             Please Log into Spotify
            </p>
          </div>)
          }
@@ -182,3 +174,14 @@ class MusicPlayer extends React.Component{
 }
 
 export default MusicPlayer
+
+// Enter your Spotify access token. Get it from{" "}
+// <a href="https://beta.developer.spotify.com/documentation/web-playback-sdk/quick-start/#authenticating-with-spotify">
+//   here
+// </a>.
+// </p>
+// <p>
+// <input type="text" value={token} onChange={e => this.setState({ token: e.target.value })} />
+// </p>
+// <p>
+// <button onClick={() => this.handleLogin()}>Go</button>
