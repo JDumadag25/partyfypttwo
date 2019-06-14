@@ -23,7 +23,7 @@ class MusicPlayer extends React.Component{
      this.playerCheckInterval = null;
   }
 
-loc
+
 
   componentDidMount = () => {
     if (this.state.loggedIn) {

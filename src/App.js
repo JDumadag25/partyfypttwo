@@ -3,6 +3,8 @@ import logo from './logo.svg';
 import './App.css';
 import MusicPlayer from './components/MusicPlayer'
 import TopBar from './components/TopBar'
+import SearchBar from './components/SearchBar'
+import Playlist from './components/Playlist'
 
 
 class App extends React.Component {
@@ -11,6 +13,8 @@ class App extends React.Component {
       <div className='App'>
         <TopBar/>
         <MusicPlayer/>
+        <SearchBar/>
+        <Playlist/>
       </div>
     )
   }
