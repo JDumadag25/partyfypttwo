@@ -8,13 +8,35 @@ import Playlist from './components/Playlist'
 
 
 class App extends React.Component {
+  constructor(props){
+    super(props)
+
+  const params = this.getHashParams()
+
+  this.state = {
+    token: params.access_token
+  }
+}
+
+  getHashParams = () => {
+    var hashParams = {};
+    var e, r = /([^&;=]+)=?([^&;]*)/g,
+        q = window.location.hash.substring(1);
+    e = r.exec(q)
+    while (e) {
+       hashParams[e[1]] = decodeURIComponent(e[2]);
+       e = r.exec(q);
+    }
+    return hashParams
+  }
+
   render(){
     return (
       <div className='App'>
         <TopBar/>
         <MusicPlayer/>
         <SearchBar/>
-        <Playlist/>
+        <Playlist token={this.state.token}/>
       </div>
     )
   }
