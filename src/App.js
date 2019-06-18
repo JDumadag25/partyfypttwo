@@ -5,6 +5,7 @@ import MusicPlayer from './components/MusicPlayer'
 import TopBar from './components/TopBar'
 import SearchBar from './components/SearchBar'
 import Playlist from './components/Playlist'
+import Homepage from './components/Homepage'
 
 
 class App extends React.Component {
@@ -33,6 +34,7 @@ class App extends React.Component {
   render(){
     return (
       <div className='App'>
+        <Homepage/>
         <TopBar/>
         <MusicPlayer/>
         <SearchBar/>
