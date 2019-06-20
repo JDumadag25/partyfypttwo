@@ -11,7 +11,8 @@ class Playlist extends React.Component{
 
       this.state = {
         user:'',
-        usersPlaylists: []
+        usersPlaylists: [],
+        collabplaylist: '64W5bbmXSTUxg6negfo96k'
       }
   }
 
@@ -22,13 +23,21 @@ class Playlist extends React.Component{
 
   getUser = () => {
     spotifyApi.getMe()
-    .then(res => console.log(res.id))
+    .then(res => this.setState({user: res.id})
   }
 
   getUserPlaylists = () => {
   spotifyApi.getUserPlaylists()
   .then(res => this.setState({usersPlaylists: res.items}))
 }
+
+getPlaylists = () => {
+    console.log('playlist rendered');
+    spotifyApi.getPlaylist(this.state.user, this.state.collabplaylist)
+    .then(res => res.tracks.items.map(item => {
+      this.setState({playlist:[...this.state.playlist, item.track]})
+    }) )
+  }
 
   render(){
     console.log(this.state.usersPlaylists);
