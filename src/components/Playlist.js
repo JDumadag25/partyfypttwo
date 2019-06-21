@@ -1,5 +1,6 @@
 import React from 'react'
 import SpotifyWebApi from 'spotify-web-api-js';
+import Songs from './Songs'
 
 const spotifyApi = new SpotifyWebApi
 
@@ -23,7 +24,7 @@ class Playlist extends React.Component{
 
   getUser = () => {
     spotifyApi.getMe()
-    .then(res => this.setState({user: res.id})
+    .then(res => this.setState({user: res.id}))
   }
 
   getUserPlaylists = () => {
@@ -41,6 +42,11 @@ getPlaylists = () => {
 
   render(){
     console.log(this.state.usersPlaylists);
+
+    const songs = this.state.playlist.map(song => {
+    return <Songs song={song}/>
+  })
+
     return(
       <h2>Playlist</h2>
     )
