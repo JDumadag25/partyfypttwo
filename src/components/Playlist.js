@@ -13,13 +13,15 @@ class Playlist extends React.Component{
       this.state = {
         user:'',
         usersPlaylists: [],
-        collabplaylist: '64W5bbmXSTUxg6negfo96k'
+        collabplaylist: '64W5bbmXSTUxg6negfo96k',
+        playlist:[]
       }
   }
 
   componentDidMount = () => {
     this.getUser()
     this.getUserPlaylists()
+    this.getPlaylists()
   }
 
   getUser = () => {
@@ -41,14 +43,16 @@ getPlaylists = () => {
   }
 
   render(){
-    console.log(this.state.usersPlaylists);
-
+    
     const songs = this.state.playlist.map(song => {
     return <Songs song={song}/>
   })
 
     return(
+      <div>
       <h2>Playlist</h2>
+      {songs}
+      </div>
     )
   }
 }
