@@ -4,7 +4,7 @@ class Songs extends React.Component{
   render(){
     console.log(this.props.song);
     return(
-      <li>song.name</li>
+      <li>{this.props.song.name}</li>
     )
   }
 }

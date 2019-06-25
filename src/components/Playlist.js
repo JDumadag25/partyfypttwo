@@ -36,14 +36,14 @@ class Playlist extends React.Component{
 
 getPlaylists = () => {
     console.log('playlist rendered');
-    spotifyApi.getPlaylist(this.state.user, this.state.collabplaylist)
+    spotifyApi.getPlaylist(this.state.collabplaylist)
     .then(res => res.tracks.items.map(item => {
       this.setState({playlist:[...this.state.playlist, item.track]})
     }) )
   }
 
   render(){
-    
+  console.log(this.state.playlist);
     const songs = this.state.playlist.map(song => {
     return <Songs song={song}/>
   })
