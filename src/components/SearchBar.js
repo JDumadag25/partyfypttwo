@@ -1,6 +1,7 @@
 import React from 'react'
 import { Button, Checkbox, Form, List } from 'semantic-ui-react'
 import SpotifyWebApi from 'spotify-web-api-js'
+import Results from './Results'
 
 const spotifyApi = new SpotifyWebApi
 
@@ -31,7 +32,7 @@ class SearchBar extends React.Component{
   render(){
 
     const songSearch = this.state.results.map(result => {
-      return <li>{result}</li>
+      return <Results results={result} handleClick={this.props.handleClick}/>
     })
 
     return(
