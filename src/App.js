@@ -6,6 +6,9 @@ import TopBar from './components/TopBar'
 import SearchBar from './components/SearchBar'
 import Playlist from './components/Playlist'
 import Homepage from './components/Homepage'
+import SpotifyWebApi from 'spotify-web-api-js';
+
+const spotifyApi = new SpotifyWebApi
 
 
 class App extends React.Component {
@@ -31,13 +34,20 @@ class App extends React.Component {
     return hashParams
   }
 
+  getSong = (e) => {
+    console.log(e.target.value);
+    spotifyApi.getTrack(e.target.value)
+    .then(res => console.log(res))
+
+  }
+
   render(){
     return (
       <div className='App'>
         <Homepage/>
         <TopBar/>
         <MusicPlayer/>
-        <SearchBar/>
+        <SearchBar handleClick={this.getSong}/>
         <Playlist token={this.state.token}/>
       </div>
     )
