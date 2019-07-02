@@ -35,12 +35,12 @@ class Playlist extends React.Component{
 }
 
 getPlaylists = () => {
-    console.log('playlist rendered');
     spotifyApi.getPlaylist(this.state.collabplaylist)
     .then(res => res.tracks.items.map(item => {
       this.setState({playlist:[...this.state.playlist, item.track]})
     }) )
   }
+
 
   render(){
   console.log(this.state.playlist);

@@ -10,6 +10,7 @@ import SpotifyWebApi from 'spotify-web-api-js';
 
 const spotifyApi = new SpotifyWebApi
 
+const partyplaylist = '64W5bbmXSTUxg6negfo96k'
 
 class App extends React.Component {
   constructor(props){
@@ -37,11 +38,23 @@ class App extends React.Component {
   getSong = (e) => {
     console.log(e.target.value);
     spotifyApi.getTrack(e.target.value)
-    .then(res => console.log(res))
+    .then(res => this.setState({
+      chosenSong: res,
+      selectedSong: {
+      name: res.name,
+      uri: res.uri,
+      artist: res.album.artists[0].name,
+      image: res.album.images[0].url,
+      trackid: res.id
+    }
+   }
+  ))
+ }
 
-  }
+
 
   render(){
+    console.log(this.state);
     return (
       <div className='App'>
         <Homepage/>
