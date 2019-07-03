@@ -19,8 +19,19 @@ class App extends React.Component {
   const params = this.getHashParams()
 
   this.state = {
-    token: params.access_token
+    token: params.access_token,
+    refreshToken: params.refresh_token,
+    loggedIn: params.access_token ? true : false,
+    collabplaylist: '64W5bbmXSTUxg6negfo96k',
+    playlist: [],
+
   }
+}
+
+componentDidMount = () => {
+  this.getUser()
+  // this.getUserPlaylists()
+  this.getPlaylists()
 }
 
   getHashParams = () => {
@@ -35,10 +46,23 @@ class App extends React.Component {
     return hashParams
   }
 
-  getSong = (e) => {
+  getUser = () => {
+    spotifyApi.getMe()
+    .then(res => this.setState({user: res.id}))
+  }
+
+  getPlaylists = () => {
+      spotifyApi.getPlaylist(this.state.collabplaylist)
+      .then(res => res.tracks.items.map(item => {
+        this.setState({playlist:[...this.state.playlist, item.track]})
+      }) )
+    }
+
+
+  getSong = async(e) => {
     console.log(e.target.value);
-    spotifyApi.getTrack(e.target.value)
-    .then(res => this.setState({
+    const res = await spotifyApi.getTrack(e.target.value)
+    await this.setState({
       chosenSong: res,
       selectedSong: {
       name: res.name,
@@ -48,8 +72,16 @@ class App extends React.Component {
       trackid: res.id
     }
    }
-  ))
+  )
+  await this.addSong()
  }
+
+ addSong = async() => {
+    let uri = this.state.selectedSong.uri
+    const newSong = await spotifyApi.getTrack(this.state.selectedSong.trackid )
+    spotifyApi.addTracksToPlaylist(partyplaylist, [uri])
+    await this.setState({playlist: [...this.state.playlist, newSong]})
+  }
 
 
 
@@ -59,9 +91,9 @@ class App extends React.Component {
       <div className='App'>
         <Homepage/>
         <TopBar/>
-        <MusicPlayer/>
+        <MusicPlayer token={this.state.token} refreshToken={this.state.refreshToken} loggedIn={this.state.loggedIn}/>
         <SearchBar handleClick={this.getSong}/>
-        <Playlist token={this.state.token}/>
+        <Playlist token={this.state.token} playlist={this.state.playlist}/>
       </div>
     )
   }

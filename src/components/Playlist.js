@@ -18,33 +18,33 @@ class Playlist extends React.Component{
       }
   }
 
-  componentDidMount = () => {
-    this.getUser()
-    this.getUserPlaylists()
-    this.getPlaylists()
-  }
+  // componentDidMount = () => {
+  //   this.getUser()
+  //   this.getUserPlaylists()
+  //   this.getPlaylists()
+  // }
 
-  getUser = () => {
-    spotifyApi.getMe()
-    .then(res => this.setState({user: res.id}))
-  }
+  // getUser = () => {
+  //   spotifyApi.getMe()
+  //   .then(res => this.setState({user: res.id}))
+  // }
 
-  getUserPlaylists = () => {
-  spotifyApi.getUserPlaylists()
-  .then(res => this.setState({usersPlaylists: res.items}))
-}
+//   getUserPlaylists = () => {
+//   spotifyApi.getUserPlaylists()
+//   .then(res => this.setState({usersPlaylists: res.items}))
+// }
 
-getPlaylists = () => {
-    spotifyApi.getPlaylist(this.state.collabplaylist)
-    .then(res => res.tracks.items.map(item => {
-      this.setState({playlist:[...this.state.playlist, item.track]})
-    }) )
-  }
+// getPlaylists = () => {
+//     spotifyApi.getPlaylist(this.state.collabplaylist)
+//     .then(res => res.tracks.items.map(item => {
+//       this.setState({playlist:[...this.state.playlist, item.track]})
+//     }) )
+//   }
 
 
   render(){
   console.log(this.state.playlist);
-    const songs = this.state.playlist.map(song => {
+    const songs = this.props.playlist.map(song => {
     return <Songs song={song}/>
   })
 
