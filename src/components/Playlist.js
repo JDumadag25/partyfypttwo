@@ -18,21 +18,21 @@ class Playlist extends React.Component{
       }
   }
 
-  // componentDidMount = () => {
-  //   this.getUser()
-  //   this.getUserPlaylists()
-  //   this.getPlaylists()
-  // }
+  componentDidMount = () => {
+    //this.getUser()
+    this.getUserPlaylists()
+    //this.getPlaylists()
+  }
 
   // getUser = () => {
   //   spotifyApi.getMe()
   //   .then(res => this.setState({user: res.id}))
   // }
 
-//   getUserPlaylists = () => {
-//   spotifyApi.getUserPlaylists()
-//   .then(res => this.setState({usersPlaylists: res.items}))
-// }
+  getUserPlaylists = () => {
+  spotifyApi.getUserPlaylists()
+  .then(res => console.log(res))
+}
 
 // getPlaylists = () => {
 //     spotifyApi.getPlaylist(this.state.collabplaylist)
@@ -43,7 +43,6 @@ class Playlist extends React.Component{
 
 
   render(){
-  console.log(this.state.playlist);
     const songs = this.props.playlist.map(song => {
     return <Songs song={song}/>
   })

@@ -7,6 +7,7 @@ import SearchBar from './components/SearchBar'
 import Playlist from './components/Playlist'
 import Homepage from './components/Homepage'
 import SpotifyWebApi from 'spotify-web-api-js';
+import { BrowserRouter as Router, Route, Redirect, Switch, withRouter } from 'react-router-dom';
 
 const spotifyApi = new SpotifyWebApi
 
@@ -88,13 +89,17 @@ componentDidMount = () => {
   render(){
     console.log(this.state);
     return (
-      <div className='App'>
-        <Homepage/>
-        <TopBar/>
-        <MusicPlayer token={this.state.token} refreshToken={this.state.refreshToken} loggedIn={this.state.loggedIn}/>
-        <SearchBar handleClick={this.getSong}/>
-        <Playlist token={this.state.token} playlist={this.state.playlist}/>
-      </div>
+      <Router>
+        <Switch>
+          <div className='App'>
+            <Homepage/>
+            <TopBar/>
+            <MusicPlayer token={this.state.token} refreshToken={this.state.refreshToken} loggedIn={this.state.loggedIn}/>
+            <SearchBar handleClick={this.getSong}/>
+            <Playlist token={this.state.token} playlist={this.state.playlist}/>
+          </div>
+        </Switch>
+      </Router>
     )
   }
 }
